@@ -3,14 +3,10 @@ import imgComputadora from '../assets/images/5b79cd8fa5ac5f3cee6a0199c191.jpg'
 import imgCelulares from '../assets/images/te2779-1_1.jpg'
 import imgParlantes from '../assets/images/400_400-440-nka-006.png'
 import imgRelojes from '../assets/images/xiaomi-mi-smart-band-6-smart-watch-reloj-inteligente.jpg'
-import { useContext } from "react"
-import { NavigationContext } from "../context/NavigationContext"
 import colors from "../constants/colors"
 import fonts from "../constants/fonts"
 
 const CategoriesScreen = ({ navigation }) => {
-
-    const { setSelectedCategory } = useContext(NavigationContext)
 
     const categories = [
         {
@@ -36,8 +32,7 @@ const CategoriesScreen = ({ navigation }) => {
             {categories.map(e => (
                 <TouchableOpacity
                     onPress={() => {
-                        navigation.navigate('Products')
-                        setSelectedCategory(e.name)
+                        navigation.navigate('Products', e.name)
                     }}
                     key={e.name}
                     style={styles.containerImage}>

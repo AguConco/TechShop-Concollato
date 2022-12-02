@@ -1,20 +1,15 @@
-import { useContext } from "react"
 import { Image, Text, StyleSheet, TouchableOpacity } from "react-native"
-import { NavigationContext } from "../context/NavigationContext"
 import fonts from "../constants/fonts"
 import colors from "../constants/colors"
+import products from "../db/products"
 
-const Products = ({navigation}) => {
-
-    const { selectedCategory, products, setSelectedProduct } = useContext(NavigationContext)
-
+const Products = ({navigation, selectedCategory}) => {
     return (
         products.map(p => (
             p.category === selectedCategory &&
             <TouchableOpacity
                 onPress={() => {
-                    setSelectedProduct(p.id)
-                    navigation.navigate('Detail')
+                    navigation.navigate('Detail', p) 
                 }}
                 style={styles.product} key={p.id}>
                 <Image style={styles.image} resizeMode="contain" source={{ uri: p.pictures[0] }} />

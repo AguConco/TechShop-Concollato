@@ -1,37 +1,48 @@
-import { View, Text, FlatList, Image, Dimensions, StyleSheet } from "react-native"
+import { View, Text, FlatList, Image, Dimensions, StyleSheet, ScrollView } from "react-native"
 import colors from "../constants/colors"
 import fonts from "../constants/fonts"
+import Counter from "./Counter";
+import MainFeatures from "./MainFeatures";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const widthWindows = Dimensions.get('window').width
 
 const ProductDetail = ({ detail }) => {
     return (
-        <View style={styles.product} key={detail.id}>
-            <FlatList
-                data={detail.pictures}
-                renderItem={({ item }) => <Image key={item} style={styles.picture} resizeMode="contain" source={{ uri: item }} />}
-                style={styles.containerPictures}
-                keyExtractor={e => e}
-                horizontal={true}
-                snapToInterval={widthWindows}
-                snapToAlignment={"center"}
-                decelerationRate={0}
-                showsHorizontalScrollIndicator={false}
-            />
-            <View style={styles.infoDetail}>
-                <Text style={styles.price}>${detail.price}</Text>
-                <Text style={styles.brand}>{detail.brand}</Text>
-                <Text style={styles.name}>{detail.name}</Text>
-            </View>
-        </View>
+        <SafeAreaView style={{ flex: 1, backgroundColor: colors.white }}>
+            <ScrollView style={{ flex: 1, backgroundColor: colors.white }}>
+                <View style={styles.product} key={detail.id}>
+                    <FlatList
+                        data={detail.pictures}
+                        keyExtractor={e => e}
+                        renderItem={({ item }) => <Image key={item} style={styles.picture} resizeMode="contain" source={{ uri: item }} />}
+                        style={styles.containerPictures}
+                        horizontal={true}
+                        snapToInterval={widthWindows}
+                        snapToAlignment={"center"}
+                        decelerationRate={0}
+                        showsHorizontalScrollIndicator={false}
+                    />
+                    <View style={styles.infoDetail}>
+                        <Text style={styles.availableQuantity}>Disponibles: {detail.available_quantity}</Text>
+                        <Text style={styles.price}>${detail.price}</Text>
+                        <Text style={styles.brand}>{detail.brand}</Text>
+                        <Text style={styles.name}>{detail.name}</Text>
+                        {detail.hasOwnProperty('main_features') && <MainFeatures mainFeatures={detail.main_features} />}
+                    </View>
+                    <Counter availableQuantity={detail.available_quantity} />
+                </View>
+            </ScrollView>
+        </SafeAreaView>
     )
 }
-
+    
 export default ProductDetail
 
 const styles = StyleSheet.create({
     product: {
         backgroundColor: colors.white,
+        paddingBottom: 30
     },
     containerPictures: {
         borderBottomColor: colors.lightGray,
@@ -49,6 +60,19 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         paddingVertical: 10,
         paddingHorizontal: 20
+    },
+    availableQuantity: {
+        fontFamily: 'PoppinsMd',
+        fontSize: fonts.h6,
+        padding: 5,
+        color: colors.white,
+        position: 'absolute',
+        backgroundColor: '#000000aa',
+        paddingHorizontal: 15,
+        borderRadius: 5,
+        zIndex: 100,
+        left: 20,
+        top: -50
     },
     price: {
         fontSize: fonts.h1,
@@ -72,5 +96,5 @@ const styles = StyleSheet.create({
         fontFamily: 'PoppinsMd',
         color: colors.letter,
         width: '100%'
-    },
+    }
 })
