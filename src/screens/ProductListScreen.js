@@ -1,20 +1,23 @@
-import { StyleSheet, View, ScrollView, Dimensions } from "react-native"
+import { StyleSheet, View, Dimensions, FlatList } from "react-native"
 import colors from "../constants/colors"
 import Products from "../components/Products"
 import fonts from "../constants/fonts"
+import { useSelector } from "react-redux"
 
 const heightWindow = Dimensions.get('window').height
 
-const ProductListScreen = ({ navigation, route }) => {
-
-    const selectedCategory = route.params
+const ProductListScreen = ({ navigation }) => {
+    const selectedCategory = useSelector(state => state.categories)
     return (
         <View style={{ flex: 1 }}>
-            <ScrollView>
-                <View style={styles.containerProducts}>
-                    <Products navigation={navigation} selectedCategory={selectedCategory} />
-                </View>
-            </ScrollView>
+            <FlatList
+                data={selectedCategory}
+                renderItem={e => <Products item={e.item} navigation={navigation} />}
+                keyExtractor={e => e.id}
+                style={styles.containerProducts}
+                numColumns={2}
+                horizontal={false}
+            />
         </View>
     )
 }
@@ -31,10 +34,7 @@ const styles = StyleSheet.create({
         color: colors.white,
     },
     containerProducts: {
-        flexDirection: "row",
-        flexWrap: 'wrap',
-        paddingVertical: 10,
-        height: heightWindow,
-        backgroundColor: colors.white
+        height: heightWindow,  
+        backgroundColor: colors.white,
     },
 })

@@ -5,25 +5,33 @@ import imgParlantes from '../assets/images/400_400-440-nka-006.png'
 import imgRelojes from '../assets/images/xiaomi-mi-smart-band-6-smart-watch-reloj-inteligente.jpg'
 import colors from "../constants/colors"
 import fonts from "../constants/fonts"
+import { useDispatch, connect } from "react-redux"
+import { selectedCategory } from "../store/actions/category.action"
 
 const CategoriesScreen = ({ navigation }) => {
+
+    const dispatch = useDispatch()
 
     const categories = [
         {
             image: imgComputadora,
-            name: 'Computadoras'
+            name: 'Computadoras',
+            id: 1
         },
         {
             image: imgCelulares,
-            name: 'Celulares'
+            name: 'Celulares',
+            id: 2
         },
         {
             image: imgParlantes,
-            name: 'Parlantes'
+            name: 'Parlantes',
+            id: 3
         },
         {
             image: imgRelojes,
-            name: 'Relojes'
+            name: 'Relojes',
+            id: 4
         }
     ]
 
@@ -32,6 +40,7 @@ const CategoriesScreen = ({ navigation }) => {
             {categories.map(e => (
                 <TouchableOpacity
                     onPress={() => {
+                        dispatch(selectedCategory(e.id))
                         navigation.navigate('Products', e.name)
                     }}
                     key={e.name}
@@ -44,7 +53,7 @@ const CategoriesScreen = ({ navigation }) => {
     )
 }
 
-export default CategoriesScreen
+export default connect()(CategoriesScreen)
 
 const styles = StyleSheet.create({
     containerCategories: {

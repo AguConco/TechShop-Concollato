@@ -4,11 +4,13 @@ import fonts from "../constants/fonts"
 import Counter from "./Counter";
 import MainFeatures from "./MainFeatures";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useSelector } from "react-redux";
 
 const widthWindows = Dimensions.get('window').width
 
-const ProductDetail = ({ detail }) => {
-    return (
+const ProductDetail = () => {
+    const detail = useSelector(state => state.product)
+     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: colors.white }}>
             <ScrollView style={{ flex: 1, backgroundColor: colors.white }}>
                 <View style={styles.product} key={detail.id}>

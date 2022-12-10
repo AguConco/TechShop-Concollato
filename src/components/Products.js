@@ -1,24 +1,26 @@
 import { Image, Text, StyleSheet, TouchableOpacity } from "react-native"
 import fonts from "../constants/fonts"
 import colors from "../constants/colors"
-import products from "../db/products"
+import { useDispatch, connect } from "react-redux"
+import { selectedProduct } from "../store/actions/product.action"
 
-const Products = ({navigation, selectedCategory}) => {
+const Products = ({ navigation, item }) => {
+    const dispatch = useDispatch()
+
     return (
-        products.map(p => (
-            p.category === selectedCategory &&
-            <TouchableOpacity
-                onPress={() => {
-                    navigation.navigate('Detail', p) 
-                }}
-                style={styles.product} key={p.id}>
-                <Image style={styles.image} resizeMode="contain" source={{ uri: p.pictures[0] }} />
-                <Text numberOfLines={2} ellipsizeMode="tail" style={styles.name}> {p.name}</Text>
-                <Text style={styles.price}>${p.price} </Text>
-            </TouchableOpacity>
-        ))
+        <TouchableOpacity
+            onPress={() => {
+                dispatch(selectedProduct(item.id))
+                navigation.navigate('Detail')
+            }}
+            style={styles.product} key={item.id}>
+            <Image style={styles.image} resizeMode="contain" source={{ uri: item.pictures[0] }} />
+            <Text numberOfLines={2} ellipsizeMode="tail" style={styles.name}> {item.name}</Text>
+            <Text style={styles.price}>${item.price} </Text>
+        </TouchableOpacity>
     )
 }
+
 
 export default Products
 

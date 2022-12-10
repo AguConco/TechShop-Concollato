@@ -24,3 +24,8 @@
 **Bottom tabs Navigation**
 
 `npm install @react-navigation/bottom-tabs`
+
+**Redux**
+
+`npm install redux react-redux`
+`npm i redux-thunk`

@@ -1,6 +1,7 @@
 export default PRODUCTS = [
     {
         category: "Relojes",
+        categoryId: 4,
         name: "Smart Band Bluetooth Smartwatch Reloj Inteligente Y68",
         price: 1899,
         id: "6D5xgjYcp3gNh7rPBK8s",
@@ -25,6 +26,7 @@ export default PRODUCTS = [
         available_quantity: 1,
         brand: "intel",
         category: "Computadoras",
+        categoryId: 1,
         name: "Pc Armada Intel Core I5 1 Tb 8gb Ram Graficos Hd Nuevas Soft",
         price: 78999
     },
@@ -40,6 +42,7 @@ export default PRODUCTS = [
             "https://http2.mlstatic.com/D_601971-MLA48897475852_012022-O.jpg"
         ],
         category: "Computadoras",
+        categoryId: 1,
         brand: "dell / hp",
         available_quantity: 150,
         id: "7njkl8XcQjwMoBiqcPGq",
@@ -49,6 +52,7 @@ export default PRODUCTS = [
     {
         brand: "Motorola",
         category: "Celulares",
+        categoryId: 2,
         price: 59999,
         main_features: [
             "Dispositivo liberado para que elijas la compañía telefónica que prefieras.",
@@ -84,6 +88,7 @@ export default PRODUCTS = [
         brand: "Xiaomi",
         price: 5069,
         category: "Relojes",
+        categoryId: 4,
         name: "Xiaomi Mi Smart Band 5 1.1 Caja De Plástico Pc Black, Malla Black De Elastómero Termoplástico Y Aleación De Aluminio Xmsh10hm",
         available_quantity: 10,
         main_features: [
@@ -109,6 +114,7 @@ export default PRODUCTS = [
         ],
         name: "Reloj Hombre Skmei 9185 Acero Negro Minimalista Gtia Top Vip",
         category: "Relojes",
+        categoryId: 4,
         id: "DkfBsNPPZYANrYMumCok",
         brand: "Skmei"
     },
@@ -133,7 +139,8 @@ export default PRODUCTS = [
         price: "79999",
         name: "Samsung Galaxy A33 5g 128 Gb Awesome Black 6 Gb Ram",
         id: "HizdIBEQiILtKdbJYYat",
-        category: "Celulares"
+        category: "Celulares",
+        categoryId: 2,
     },
     {
         available_quantity: 50,
@@ -150,6 +157,7 @@ export default PRODUCTS = [
         ],
         id: "I1acF5GGcEW4DEDRq1zV",
         category: "Parlantes",
+        categoryId: 3,
         price: 8250,
         pictures: [
             "https://http2.mlstatic.com/D_917910-MLA44716279339_012021-O.jpg",
@@ -164,6 +172,7 @@ export default PRODUCTS = [
     {
         name: "Smartwatch Amazfit Basic Bip U 1.43 Caja De Policarbonato Pink, Malla Pink De Caucho De Silicona A2017",
         category: "Relojes",
+        categoryId: 4,
         main_features: [
             "Pantalla táctil LCD TFT de 1.43\".",
             "Resiste hasta 50m bajo el agua.",
@@ -192,6 +201,7 @@ export default PRODUCTS = [
             "https://http2.mlstatic.com/D_651005-MLA45335280444_032021-O.jpg"
         ],
         category: "Computadoras",
+        categoryId: 1,
         id: "Uxhbxss2GuFLppxtOpR6",
         price: "63999",
         name: "Pc Gamer Armada Intel I3 10100 8gb M2 480 Core X4 Threads X8",
@@ -217,7 +227,8 @@ export default PRODUCTS = [
         id: "Xnc3eAayWzvOw1fFxiXA",
         name: "Alcatel 1 16 GB  negro metálico 1 GB RAM",
         brand: "Alcatel",
-        category: "Celulares"
+        category: "Celulares",
+        categoryId: 2,
     },
     {
         pictures: [
@@ -238,6 +249,7 @@ export default PRODUCTS = [
         brand: "Philco",
         price: 13964,
         category: "Parlantes",
+        categoryId: 3,
         available_quantity: 41,
         name: "Parlante Philco Djp11 Con Bluetooth 220v"
     },
@@ -262,7 +274,8 @@ export default PRODUCTS = [
         ],
         id: "d0w9cwhBJMj0xgH6kJJO",
         price: 54450,
-        category: "Parlantes"
+        category: "Parlantes",
+        categoryId: 3,
     },
     {
         available_quantity: 2,
@@ -285,6 +298,7 @@ export default PRODUCTS = [
         ],
         price: 6579,
         category: "Parlantes",
+        categoryId: 3,
         name: "Parlante Noga One Light Ngl-400bt Con Bluetooth Negro",
         id: "ggd9DviE9O4pNw8z4Bwl"
     },
@@ -298,6 +312,7 @@ export default PRODUCTS = [
         ],
         brand: "lenovo",
         category: "Computadoras",
+        categoryId: 1,
         main_features: [
             "Procesador AMD Ryzen 5.",
             "Memoria RAM de 8GB.",
@@ -327,11 +342,12 @@ export default PRODUCTS = [
             "Potencia de 46W.",
             "Conector de entrada: Auxiliar, RCA, Miniplug.",
             "Cantidad de parlantes: 2.",
-            "Lugar de colocación: de mesa.",
+            "Lugar de colocación: de me3sa.",
             "Dimensiones: 161mm de ancho, 240mm de alto y 190mm de profundidad.",
             "Ideal para escuchar tu música preferida."
         ],
         category: "Parlantes",
+        categoryId: 3,
         id: "hUN7TJs733m9jdkXI17d",
         brand: "Thonet & Vander",
         available_quantity: 5
@@ -339,6 +355,7 @@ export default PRODUCTS = [
     {
         available_quantity: 150,
         category: "Computadoras",
+        categoryId: 1,
         main_features: [
             "Procesador AMD Ryzen 5.",
             "Memoria RAM de 16GB.",
@@ -380,6 +397,7 @@ export default PRODUCTS = [
             "Malla intercambiable por otros colores, no incluidos en el producto."
         ],
         category: "Relojes",
+        categoryId: 4,
         pictures: [
             "https://mla-s2-p.mlstatic.com/913757-MLA44752976771_012021-F.jpg",
             "https://mla-s2-p.mlstatic.com/748037-MLA44753189470_012021-F.jpg",
@@ -414,7 +432,8 @@ export default PRODUCTS = [
         ],
         price: 89999,
         available_quantity: 500,
-        category: "Celulares"
+        category: "Celulares",
+        categoryId: 2,
     },
     {
         available_quantity: 50,
@@ -422,6 +441,7 @@ export default PRODUCTS = [
         price: 215999,
         id: "sE9fDvlaepOrpJlXJRiB",
         category: "Celulares",
+        categoryId: 2,
         main_features: [
             "Dispositivo liberado para que elijas la compañía telefónica que prefieras.",
             "Compatible con redes 5G.",
