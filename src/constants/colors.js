@@ -7,5 +7,6 @@ export default {
     letter: '#575758',
     red: '#ec575a',
     green: '#88c53b',
-    shadow: '#00000030'
+    shadow: '#00000030',
+    blue: '#1872fa'
 }

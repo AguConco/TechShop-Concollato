@@ -11,13 +11,17 @@ import fonts from '../constants/fonts'
 
 const tab = createBottomTabNavigator()
 
-const TabNavigation = () => {
-    const IconTab = ({ icon, name, focused }) => (
+const IconTab = ({ icon, name, focused }) => {
+
+    return (
         <View style={styles.containerIcon}>
             <FontAwesomeIcon icon={icon} size={fonts.h3} color={focused ? colors.primary : colors.darkGray} />
             {focused && <Text style={styles.iconText}>{name}</Text>}
         </View>
     )
+}
+
+const TabNavigation = () => {
 
     return (
         <NavigationContainer>
@@ -42,12 +46,11 @@ const styles = StyleSheet.create({
     containerIcon: {
         alignItems: 'center',
         padding: 10,
-        borderRadius: 20
     },
     iconText: {
         fontFamily: 'PoppinsMd',
         color: colors.primary,
         fontWeight: '600',
         fontSize: 12
-    },
+    }
 })

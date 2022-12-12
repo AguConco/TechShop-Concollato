@@ -22,7 +22,7 @@ const Products = ({ navigation, item }) => {
 }
 
 
-export default Products
+export default connect()(Products)
 
 const styles = StyleSheet.create({
     product: {

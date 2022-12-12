@@ -45,7 +45,7 @@ const CategoriesScreen = ({ navigation }) => {
                     }}
                     key={e.name}
                     style={styles.containerImage}>
-                    <Image style={styles.image} resizeMode='contain' source={e.image}></Image>
+                    <Image style={styles.image} resizeMode='contain' source={e.image} />
                     <Text style={styles.name}>{e.name}</Text>
                 </TouchableOpacity>
             ))}
