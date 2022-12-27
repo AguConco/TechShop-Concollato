@@ -6,7 +6,7 @@ const Stack = createNativeStackNavigator()
 const CartNavigation = () => {
     return (
         <Stack.Navigator initialRouteName="ShopingCart">
-            <Stack.Screen name="ShopingCart" component={CartScreen} />
+            <Stack.Screen name="ShopingCart" component={CartScreen} options={{headerShown:false}}/>
         </Stack.Navigator>
     )
 }

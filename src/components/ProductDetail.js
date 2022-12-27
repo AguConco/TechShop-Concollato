@@ -1,18 +1,35 @@
-import { View, Text, FlatList, Image, Dimensions, StyleSheet, ScrollView } from "react-native"
+import {
+    View,
+    Text,
+    FlatList,
+    Image,
+    Dimensions,
+    StyleSheet,
+} from "react-native"
 import colors from "../constants/colors"
 import fonts from "../constants/fonts"
 import Counter from "./Counter";
 import MainFeatures from "./MainFeatures";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import Loading from "./Loading";
 
 const widthWindows = Dimensions.get('window').width
 
 const ProductDetail = () => {
-    const detail = useSelector(state => state.product)
-     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: colors.white }}>
-            <ScrollView style={{ flex: 1, backgroundColor: colors.white }}>
+    const [loading, setLoading] = useState(true)
+    const detail = useSelector(state => state.product.selected)
+
+    useEffect(() => {
+        setLoading(true)
+        detail && setLoading(false)
+    }, [detail])
+
+    return (
+        <View style={{ flex: 1, backgroundColor: colors.white }}>
+            {loading ?
+                <Loading />
+                :
                 <View style={styles.product} key={detail.id}>
                     <FlatList
                         data={detail.pictures}
@@ -33,12 +50,11 @@ const ProductDetail = () => {
                         {detail.hasOwnProperty('main_features') && <MainFeatures mainFeatures={detail.main_features} />}
                     </View>
                     <Counter availableQuantity={detail.available_quantity} />
-                </View>
-            </ScrollView>
-        </SafeAreaView>
+                </View>}
+        </View>
     )
 }
-    
+
 export default ProductDetail
 
 const styles = StyleSheet.create({
@@ -49,7 +65,8 @@ const styles = StyleSheet.create({
     containerPictures: {
         borderBottomColor: colors.lightGray,
         borderBottomWidth: 1,
-        paddingVertical: 20
+        paddingVertical: 20,
+        height: 310,
     },
     picture: {
         height: 270,

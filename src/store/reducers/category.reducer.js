@@ -1,13 +1,18 @@
-import products from "../../db/products"
-import { SELECTED_CATEGORY } from "../actions/category.action";
+import { GET_CATEGORY, RESET_SELECTED_CATEGORY } from "../actions/category.action";
 
 const initialState = {
     selected: []
 }
 
 const CategoryReducer = (state = initialState, action) => {
-    if(action.type === SELECTED_CATEGORY) return products.filter(e => e.categoryId === action.categoryId)
-    return state
+    switch (action.type) {
+        case GET_CATEGORY:
+            return { selected: action.payload }
+        case RESET_SELECTED_CATEGORY:
+            return { selected: [] }
+        default:
+            return state;
+    }
 }
 
 

@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, TextInput, Pressable, TouchableOpacity } from "react-native"
+import {
+    View,
+    Text,
+    StyleSheet,
+    TextInput,
+    Pressable,
+    TouchableOpacity
+} from "react-native"
 import colors from "../constants/colors"
 import fonts from "../constants/fonts"
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -7,12 +14,9 @@ import { useState, useEffect } from "react";
 import { addProduct } from "../store/actions/cart.action";
 import { useDispatch, connect, useSelector } from "react-redux";
 
-
 const Counter = ({ availableQuantity }) => {
-
-    const product = useSelector(state => state.product)
     const dispatch = useDispatch()
-
+    const product = useSelector(state => state.product.selected)
     const [quantity, setQuantity] = useState(1)
 
     useEffect(() => {
@@ -46,7 +50,7 @@ const Counter = ({ availableQuantity }) => {
                     </Text>
                 </Pressable>
             </View>
-            <TouchableOpacity style={styles.btnAddCart} onPress={() => dispatch(addProduct({...product, quantity}))}>
+            <TouchableOpacity style={styles.btnAddCart} onPress={() => dispatch(addProduct({ ...product, quantity }))}>
                 <Text style={styles.btnAddCartText}>Agregar al carrito</Text>
             </TouchableOpacity>
         </View>
@@ -74,16 +78,16 @@ const styles = StyleSheet.create({
         backgroundColor: colors.lightGray,
         color: colors.letter,
         textAlign: 'center',
-        fontSize: fonts.h5,
+        fontSize: fonts.h4,
         fontFamily: 'PoppinsMd',
     },
     btnCounter: {
         paddingHorizontal: 22,
-        paddingVertical: 15,
+        paddingVertical: 20,
     },
     btnAddCart: {
         backgroundColor: colors.primary,
-        padding: 10,
+        padding: 15,
         borderRadius: 5,
         width: '100%',
     },
@@ -91,6 +95,6 @@ const styles = StyleSheet.create({
         color: colors.white,
         fontFamily: 'PoppinsMd',
         textAlign: 'center',
-        fontSize: fonts.h5
+        fontSize: fonts.h4
     }
 })

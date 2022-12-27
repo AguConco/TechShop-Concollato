@@ -29,3 +29,12 @@
 
 `npm install redux react-redux`\
 `npm i redux-thunk`
+
+**Firebase**
+
+`npx expo install firebase`
+
+**Cámara**
+
+`npx expo install expo-image-picker`\
+`npx expo install expo-file-system`

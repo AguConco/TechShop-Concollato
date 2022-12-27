@@ -6,12 +6,11 @@ import { selectedProduct } from "../store/actions/product.action"
 
 const Products = ({ navigation, item }) => {
     const dispatch = useDispatch()
-
     return (
         <TouchableOpacity
             onPress={() => {
                 dispatch(selectedProduct(item.id))
-                navigation.navigate('Detail')
+                navigation.navigate('Detail', {navigation: navigation})
             }}
             style={styles.product} key={item.id}>
             <Image style={styles.image} resizeMode="contain" source={{ uri: item.pictures[0] }} />

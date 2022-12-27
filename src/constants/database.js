@@ -1,1 +1,0 @@
-export const URL_API = 'https://proyecto-coderhouse-a5061-default-rtdb.firebaseio.com/' 

@@ -1,14 +1,18 @@
-import products from '../../db/products'
-import { SELECTED_PRODUCT } from '../actions/product.action'
+import { SELECTED_PRODUCT, RESET_SELECTED_PRODUCT } from '../actions/product.action'
 
 const initialState = {
-    products: products,
     selected: null
 }
 
 const ProductReducer = (state = initialState, action) => {
-    if(action.type === SELECTED_PRODUCT) return products.find(e => e.id === action.productId)
-    return state
+    switch (action.type) {
+        case SELECTED_PRODUCT:
+            return { selected: action.payload }
+        case RESET_SELECTED_PRODUCT:
+            return { selected: null }
+        default:
+            return state
+    }
 }
 
 export default ProductReducer

@@ -6,10 +6,12 @@ import imgRelojes from '../assets/images/xiaomi-mi-smart-band-6-smart-watch-relo
 import colors from "../constants/colors"
 import fonts from "../constants/fonts"
 import { useDispatch, connect } from "react-redux"
-import { selectedCategory } from "../store/actions/category.action"
+import { resetSelectedCategory, selectedCategory } from "../store/actions/category.action"
+import { useEffect } from "react"
+import { useIsFocused } from '@react-navigation/native'
 
 const CategoriesScreen = ({ navigation }) => {
-
+    const isFocused = useIsFocused()
     const dispatch = useDispatch()
 
     const categories = [
@@ -34,6 +36,10 @@ const CategoriesScreen = ({ navigation }) => {
             id: 4
         }
     ]
+
+    useEffect(() => {
+        dispatch(resetSelectedCategory())
+    }, [isFocused])
 
     return (
         <View style={styles.containerCategories}>
