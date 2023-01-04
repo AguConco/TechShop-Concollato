@@ -1,4 +1,4 @@
-import { ADD_PRODUCT, REMOVE_PRODUCT } from "../actions/cart.action";
+import { ADD_PRODUCT, REMOVE_PRODUCT, GET_CART } from "../actions/cart.action";
 
 const initialState = {
     cart: [],
@@ -10,25 +10,12 @@ const sumTotal = (cart) => cart.map(e => e.quantity * e.price).reduce((a, b) => 
 const CartReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_PRODUCT:
-            const isInCart = (product) => state.cart.some(cartProduct => cartProduct.id === product.id)
-
-            if (isInCart(action.product)) {
-                let productCurrent = state.cart.find(e => e.id === action.product.id)
-
-                if ((productCurrent.quantity + action.product.quantity) <= productCurrent.available_quantity) {
-                    productCurrent.quantity += action.product.quantity
-                } else {
-                    productCurrent.quantity = productCurrent.available_quantity
-                }
-
-                return { cart: state.cart, totalPrice: sumTotal(state.cart) }
-            } else {
-                const cart = [...state.cart, action.product]
-                return { cart: cart, totalPrice: sumTotal(cart) }
-            }
+            return { cart: state.cart, totalPrice: sumTotal(state.cart) }
         case REMOVE_PRODUCT:
             const cart = state.cart.filter(e => e.id !== action.product.id)
             return { cart: cart, totalPrice: sumTotal(cart) }
+        case GET_CART:
+            return { cart: action.cart, totalPrice: sumTotal(action.cart) }
         default:
             return state
 

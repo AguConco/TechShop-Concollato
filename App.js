@@ -4,6 +4,7 @@ import store from './src/store'
 import { initializeApp } from "firebase/app"
 import MainNavigator from "./src/navigation"
 import Loading from './src/components/Loading'
+import { init } from "./src/db";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAu_E4dO-0y0H6paI1IwOEMtbeweN9Pv7U",
@@ -15,6 +16,13 @@ const firebaseConfig = {
 };
 
 initializeApp(firebaseConfig);
+
+init()
+  .then(() => console.log("Database initialized"))
+  .catch((err) => {
+    console.log("Data base fail connect");
+    console.log(err.message);
+  });
 
 export default function App() {
 

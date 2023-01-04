@@ -8,15 +8,17 @@ import {
 } from "react-native"
 import colors from "../constants/colors"
 import fonts from "../constants/fonts"
-import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { useState, useEffect } from "react";
-import { addProduct } from "../store/actions/cart.action";
-import { useDispatch, connect, useSelector } from "react-redux";
+import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
+import { useState, useEffect } from "react"
+import { addProduct } from "../store/actions/cart.action"
+import { useDispatch, connect, useSelector } from "react-redux"
 
 const Counter = ({ availableQuantity }) => {
     const dispatch = useDispatch()
     const product = useSelector(state => state.product.selected)
+    const user = useSelector(state => state.user.user)
+
     const [quantity, setQuantity] = useState(1)
 
     useEffect(() => {
@@ -50,7 +52,7 @@ const Counter = ({ availableQuantity }) => {
                     </Text>
                 </Pressable>
             </View>
-            <TouchableOpacity style={styles.btnAddCart} onPress={() => dispatch(addProduct({ ...product, quantity }))}>
+            <TouchableOpacity style={styles.btnAddCart} onPress={() => dispatch(addProduct({ ...product, quantity }, user.uid))}>
                 <Text style={styles.btnAddCartText}>Agregar al carrito</Text>
             </TouchableOpacity>
         </View>

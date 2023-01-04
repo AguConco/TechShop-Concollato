@@ -2,14 +2,15 @@ import { useEffect, useState } from "react"
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native"
 import colors from "../constants/colors"
 import fonts from "../constants/fonts"
-import { useDispatch, connect } from "react-redux"
+import { useDispatch, connect, useSelector } from "react-redux"
 import { selectedProduct } from "../store/actions/product.action"
 import { removeProduct } from "../store/actions/cart.action"
 
 const ProductCart = ({ item, navigation, totalPrice }) => {
     const dispatch = useDispatch()
+    const user = useSelector(state => state.user.user)
     const [quantity, setQuantity] = useState(0)
-    
+
     useEffect(() => {
         item.quantity >= item.available_quantity ? setQuantity(item.available_quantity) : setQuantity(item.quantity)
     }, [totalPrice])
@@ -32,7 +33,7 @@ const ProductCart = ({ item, navigation, totalPrice }) => {
                 </View>
             </View>
             <View style={styles.options}>
-                <TouchableOpacity onPress={() => {dispatch(removeProduct(item))}}><Text style={styles.removeProductCart}> Eliminar del carrito</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => { dispatch(removeProduct(item, user.uid)) }}><Text style={styles.removeProductCart}> Eliminar del carrito</Text></TouchableOpacity>
             </View>
         </View>
     )

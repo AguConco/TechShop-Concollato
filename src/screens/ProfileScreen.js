@@ -7,7 +7,7 @@ import { logOut } from "../store/actions/auth.action"
 import noPhoto from '../assets/images/no_photo.jpg'
 import { useEffect, useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
-import { faGear, faRightFromBracket, faShoppingBag } from "@fortawesome/free-solid-svg-icons"
+import { faRightFromBracket, faShoppingBag } from "@fortawesome/free-solid-svg-icons"
 import { useIsFocused } from '@react-navigation/native'
 
 const ProfileScreen = ({ navigation }) => {

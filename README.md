@@ -36,5 +36,7 @@
 
 **Cámara**
 
-`npx expo install expo-image-picker`\
-`npx expo install expo-file-system`
+`npx expo install expo-image-picker`
+
+**db SQL**
+`npx expo install expo-sqlite`

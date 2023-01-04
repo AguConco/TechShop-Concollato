@@ -1,23 +1,27 @@
 import { useEffect, useState } from "react"
 import { Text, View, StyleSheet, FlatList, TouchableOpacity } from "react-native"
-import { useSelector } from "react-redux"
 import ProductCart from "../components/ProductCart"
 import colors from "../constants/colors"
 import fonts from "../constants/fonts"
 import { useIsFocused } from '@react-navigation/native'
 import { SafeAreaView } from "react-native-safe-area-context"
+import { useDispatch, connect, useSelector } from "react-redux"
+import { getCart } from "../store/actions/cart.action"
 
 const CartScreen = ({ navigation }) => {
     const isFocused = useIsFocused()
 
+    const dispatch = useDispatch()
     const [cartProducts, setCartProducts] = useState([])
     const [totalPrice, setTotalPrice] = useState(0)
     const cart = useSelector(state => state.cart)
+    const user = useSelector(state => state.user.user)
 
     useEffect(() => {
+        dispatch(getCart(user.uid))
         setCartProducts(cart.cart)
         setTotalPrice(cart.totalPrice)
-    }, [isFocused, cart])
+    }, [isFocused, cart.totalPrice])
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: colors.white }}>
@@ -43,7 +47,7 @@ const CartScreen = ({ navigation }) => {
     )
 }
 
-export default CartScreen
+export default connect()(CartScreen)
 
 const styles = StyleSheet.create({
     cartEmpty: {
