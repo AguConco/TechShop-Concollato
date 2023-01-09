@@ -58,11 +58,11 @@ export const deleteProduct = (id, uid) => {
     return promise
 }
 
-export const isInCart = (id) => {
+export const isInCart = (id, uid) => {
     const promise = new Promise((resolve, reject) => {
         db.transaction((tx) => {
             tx.executeSql(
-                `SELECT * FROM cart WHERE product_id = '${id}'`,
+                `SELECT * FROM cart WHERE product_id = '${id}' and uid = '${uid}'`,
                 [],
                 (_, result) => resolve(result),
                 (_, err) => reject(err)
@@ -77,6 +77,20 @@ export const updateProduct = (product, id, uid) => {
         db.transaction((tx) => {
             tx.executeSql(
                 `UPDATE cart SET product = '${product}' WHERE product_id = '${id}' and uid = '${uid}'`,
+                [],
+                (_, result) => resolve(result),
+                (_, err) => reject(err)
+            )
+        })
+    })
+    return promise
+}
+
+export const confirmedOrder = (uid) => {
+    const promise = new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+            tx.executeSql(
+                `DELETE FROM cart WHERE uid = '${uid}'`,
                 [],
                 (_, result) => resolve(result),
                 (_, err) => reject(err)

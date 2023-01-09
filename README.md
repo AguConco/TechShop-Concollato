@@ -39,4 +39,9 @@
 `npx expo install expo-image-picker`
 
 **db SQL**
+
 `npx expo install expo-sqlite`
+
+**Checkbox**
+
+`npx expo install expo-checkbox`

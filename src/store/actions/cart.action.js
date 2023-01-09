@@ -6,7 +6,7 @@ export const GET_CART = 'GET_CART'
 
 export const addProduct = (product, uid) => {
     return (dispatch) => {
-        isInCart(product.id)
+        isInCart(product.id, uid)
             .then(e => {
                 if (e.rows.length != 0) {
                     let productCurrent = JSON.parse(e.rows._array[0].product)
@@ -64,3 +64,4 @@ export const getCart = (uid) => {
             })
     }
 }
+

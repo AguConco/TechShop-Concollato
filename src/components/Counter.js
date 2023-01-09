@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import { useState, useEffect } from "react"
 import { addProduct } from "../store/actions/cart.action"
 import { useDispatch, connect, useSelector } from "react-redux"
+import { resetIdOrder } from "../store/actions/order.action"
 
 const Counter = ({ availableQuantity }) => {
     const dispatch = useDispatch()
@@ -52,7 +53,10 @@ const Counter = ({ availableQuantity }) => {
                     </Text>
                 </Pressable>
             </View>
-            <TouchableOpacity style={styles.btnAddCart} onPress={() => dispatch(addProduct({ ...product, quantity }, user.uid))}>
+            <TouchableOpacity style={styles.btnAddCart} onPress={() => {
+                dispatch(resetIdOrder())
+                dispatch(addProduct({ ...product, quantity }, user.uid))
+            }}>
                 <Text style={styles.btnAddCartText}>Agregar al carrito</Text>
             </TouchableOpacity>
         </View>
