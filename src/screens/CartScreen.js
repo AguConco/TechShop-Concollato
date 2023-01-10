@@ -7,7 +7,6 @@ import { useIsFocused } from '@react-navigation/native'
 import { SafeAreaView } from "react-native-safe-area-context"
 import { useDispatch, connect, useSelector } from "react-redux"
 import { getCart } from "../store/actions/cart.action"
-import { resetIdOrder } from "../store/actions/order.action"
 
 const CartScreen = ({ navigation }) => {
     const isFocused = useIsFocused()
@@ -41,7 +40,7 @@ const CartScreen = ({ navigation }) => {
                     <View style={styles.detailCart}>
                         <Text style={styles.totalPrice}>Total: $ {totalPrice}</Text>
                         <TouchableOpacity onPress={() => navigation.navigate('Checkout')}><Text style={styles.buy}>Comprar</Text></TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate('Categories')}><Text style={styles.continue}>Seguir Comprando</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('Categories', {screen: 'Category'})}><Text style={styles.continue}>Seguir Comprando</Text></TouchableOpacity>
                     </View>
                 </View>}
         </SafeAreaView>

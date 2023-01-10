@@ -95,7 +95,8 @@ const CheckoutScreen = ({ navigation }) => {
         dispatch(getCart(user.uid))
         setCartProducts(cart.cart)
         setTotalPrice(cart.totalPrice + delivery.price)
-    }, [isFocused, cart.totalPrice, delivery.price, order.orderId])
+        cart.cart.length === 0 && navigation.navigate('ShoppingCart')
+    }, [isFocused, cart.totalPrice, delivery.price, order])
 
     const item = (e) => (
         <View style={styles.item}>
@@ -112,95 +113,89 @@ const CheckoutScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: colors.white }}>
-            {order.orderId === '' ?
-                <ScrollView style={styles.checkout}>
-                    <View style={styles.detailOrder}>
-                        <Text style={styles.title}>Detalle de tu compra</Text>
-                        <FlatList
-                            data={cartProducts}
-                            keyExtractor={e => e.id}
-                            renderItem={item}
-                            style={styles.listItems}
-                        />
-                    </View>
-                    <Text style={styles.total}>Total en productos: $ {totalPrice - delivery.price}</Text>
-                    <View style={{ padding: 20 }}>
-                        <Text style={styles.titleInfo}>Información para realizar la entrega</Text>
-                        <View style={{ marginBottom: 10 }}>
-                            <View style={styles.containerCheckbox}>
-                                <Checkbox
-                                    style={styles.checkbox}
-                                    value={delivery.value === 'option_1'}
-                                    onValueChange={() => {
-                                        setError('')
-                                        setDelivery({ value: 'option_1', price: 1590 })
-                                    }}
-                                    color={colors.blue}
-                                />
-                                <Text style={{ ...styles.label, width: '65%' }}>Llega a tu domicilio</Text>
-                                <Text style={styles.label}>$ 1590</Text>
-                            </View>
-                            <View style={styles.containerCheckbox}>
-                                <Checkbox
-                                    style={styles.checkbox}
-                                    value={delivery.value === 'option_2'}
-                                    onValueChange={() => {
-                                        setAddress('')
-                                        setHeight('')
-                                        setError('')
-                                        setDelivery({ value: 'option_2', price: 1399 })
-                                    }}
-                                    color={colors.blue}
-                                />
-                                <Text style={styles.label}>Retiro en correo u otros puntos</Text>
-                                <Text style={styles.label}>$ 1399</Text>
-                            </View>
+
+            <ScrollView style={styles.checkout}>
+                <View style={styles.detailOrder}>
+                    <Text style={styles.title}>Detalle de tu compra</Text>
+                    <FlatList
+                        data={cartProducts}
+                        keyExtractor={e => e.id}
+                        renderItem={item}
+                        style={styles.listItems}
+                    />
+                </View>
+                <Text style={styles.total}>Total en productos: $ {totalPrice - delivery.price}</Text>
+                <View style={{ padding: 20 }}>
+                    <Text style={styles.titleInfo}>Información para realizar la entrega</Text>
+                    <View style={{ marginBottom: 10 }}>
+                        <View style={styles.containerCheckbox}>
+                            <Checkbox
+                                style={styles.checkbox}
+                                value={delivery.value === 'option_1'}
+                                onValueChange={() => {
+                                    setError('')
+                                    setDelivery({ value: 'option_1', price: 1590 })
+                                }}
+                                color={colors.blue}
+                            />
+                            <Text style={{ ...styles.label, width: '65%' }}>Llega a tu domicilio</Text>
+                            <Text style={styles.label}>$ 1590</Text>
                         </View>
-                        {delivery.value === 'option_1' &&
-                            <View style={{ flexDirection: 'row' }}>
-                                <TextInput
-                                    placeholder="Dirección"
-                                    onChangeText={validateAddress}
-                                    value={address}
-                                    style={{ ...styles.input, width: '65%', marginRight: '2.5%' }}
-                                />
-                                <TextInput
-                                    placeholder="Altura"
-                                    onChangeText={setHeight}
-                                    value={height}
-                                    style={{ ...styles.input, width: '32.5%' }}
-                                    keyboardType={"number-pad"}
-                                />
-                            </View>}
-                        <Text style={styles.titleInfo}>Información para estar en contacto</Text>
-                        <TextInput
-                            placeholder="Teléfono"
-                            onChangeText={validatePhone}
-                            value={phone}
-                            style={styles.input}
-                            keyboardType={"phone-pad"}
-                        />
-                        <TextInput
-                            placeholder="Comentario de la compra (opcional)"
-                            onChangeText={setCommentary}
-                            value={commentary}
-                            style={styles.input}
-                        />
+                        <View style={styles.containerCheckbox}>
+                            <Checkbox
+                                style={styles.checkbox}
+                                value={delivery.value === 'option_2'}
+                                onValueChange={() => {
+                                    setAddress('')
+                                    setHeight('')
+                                    setError('')
+                                    setDelivery({ value: 'option_2', price: 1399 })
+                                }}
+                                color={colors.blue}
+                            />
+                            <Text style={styles.label}>Retiro en correo u otros puntos</Text>
+                            <Text style={styles.label}>$ 1399</Text>
+                        </View>
                     </View>
-                    {error && <Text style={styles.error}> {error} </Text>}
-                    <View style={styles.containerBtn}>
-                        <Text style={styles.total}>Total: $ {totalPrice}</Text>
-                        <TouchableOpacity onPress={() => validatePurchase()}><Text style={styles.buy}>Realizar compra</Text></TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate('ShoppingCart')}><Text style={styles.continue}>Volver al carrito</Text></TouchableOpacity>
-                    </View>
-                </ScrollView>
-                :
-                <View style={styles.orderCompleted}>
-                    <Text style={styles.title}>¡Tu compra fue procesada con éxito!</Text>
-                    <TouchableOpacity onPress={() => navigation.navigate('ShoppingCart')}><Text style={styles.buy}>Ver mis compras</Text></TouchableOpacity>
+                    {delivery.value === 'option_1' &&
+                        <View style={{ flexDirection: 'row' }}>
+                            <TextInput
+                                placeholder="Dirección"
+                                onChangeText={validateAddress}
+                                value={address}
+                                style={{ ...styles.input, width: '65%', marginRight: '2.5%' }}
+                            />
+                            <TextInput
+                                placeholder="Altura"
+                                onChangeText={setHeight}
+                                value={height}
+                                style={{ ...styles.input, width: '32.5%' }}
+                                keyboardType={"number-pad"}
+                            />
+                        </View>}
+                    <Text style={styles.titleInfo}>Información para estar en contacto</Text>
+                    <TextInput
+                        placeholder="Teléfono"
+                        onChangeText={validatePhone}
+                        value={phone}
+                        style={styles.input}
+                        keyboardType={"phone-pad"}
+                    />
+                    <TextInput
+                        placeholder="Comentario de la compra (opcional)"
+                        onChangeText={setCommentary}
+                        value={commentary}
+                        style={styles.input}
+                    />
+                </View>
+                {error && <Text style={styles.error}> {error} </Text>}
+                <View style={styles.containerBtn}>
+                    <Text style={styles.total}>Total: $ {totalPrice}</Text>
+                    <TouchableOpacity onPress={() => validatePurchase()}><Text style={styles.buy}>Realizar compra</Text></TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('ShoppingCart')}><Text style={styles.continue}>Volver al carrito</Text></TouchableOpacity>
                 </View>
-            }
+            </ScrollView>
+
         </SafeAreaView>
     )
 }

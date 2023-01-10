@@ -1,8 +1,8 @@
-import { addDoc, collection, getFirestore, Timestamp } from "firebase/firestore"
+import { addDoc, collection, getDocs, getFirestore, query, Timestamp, where } from "firebase/firestore"
 import { confirmedOrder } from "../../db"
 
 export const CONFIRMED_ORDER = 'CONFIRMED_ORDER'
-export const RESET_ID_ORDER = 'RESET_ID_ORDER'
+export const GET_ORDERS = 'GET_ORDERS'
 
 export const generateOrder = (infoOrder) => {
     return (dispatch) => {
@@ -40,7 +40,21 @@ export const generateOrder = (infoOrder) => {
     }
 }
 
-export const resetIdOrder = () => ({
-    type: RESET_ID_ORDER,
-    orderId: ''
-})
+export const getOrder = (uid) => {
+    return (dispatch) => {
+        const db = getFirestore()
+        const ordersCollection = query(collection(db, "orders"), where("uid", "==", uid))
+        getDocs(ordersCollection).then(e => {
+            e.docs.length === 0 ? 
+            dispatch({
+                type: GET_ORDERS,
+                orders: null
+            })
+            :
+            dispatch({
+                type: GET_ORDERS,
+                orders: e.docs.map(order => ({ ...order.data(), orderId: order._document.key.path.segments[6] }))
+            })
+        })
+    }
+}

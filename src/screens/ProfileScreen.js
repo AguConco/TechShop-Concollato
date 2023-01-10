@@ -34,7 +34,7 @@ const ProfileScreen = ({ navigation }) => {
             </View>
             <View style={styles.optionsUser}>
                 <View style={styles.containerBtnOption}>
-                    <TouchableOpacity onPress={() => { }}><Text style={styles.option}><FontAwesomeIcon icon={faShoppingBag} color={colors.letter} />   Mis compras</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('MyPurchases')}><Text style={styles.option}><FontAwesomeIcon icon={faShoppingBag} color={colors.letter} />   Mis compras</Text></TouchableOpacity>
                 </View>
                 <View style={styles.containerBtnLogOut}>
                     <TouchableOpacity onPress={() => dispatch(logOut())}><Text style={styles.btnLogOut}><FontAwesomeIcon icon={faRightFromBracket} color={colors.darkGray} />   Cerrar sesión</Text></TouchableOpacity>
