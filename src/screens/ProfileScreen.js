@@ -9,6 +9,7 @@ import { useEffect, useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import { faRightFromBracket, faShoppingBag } from "@fortawesome/free-solid-svg-icons"
 import { useIsFocused } from '@react-navigation/native'
+import { resetOrder } from "../store/actions/order.action"
 
 const ProfileScreen = ({ navigation }) => {
 
@@ -37,7 +38,11 @@ const ProfileScreen = ({ navigation }) => {
                     <TouchableOpacity onPress={() => navigation.navigate('MyPurchases')}><Text style={styles.option}><FontAwesomeIcon icon={faShoppingBag} color={colors.letter} />   Mis compras</Text></TouchableOpacity>
                 </View>
                 <View style={styles.containerBtnLogOut}>
-                    <TouchableOpacity onPress={() => dispatch(logOut())}><Text style={styles.btnLogOut}><FontAwesomeIcon icon={faRightFromBracket} color={colors.darkGray} />   Cerrar sesión</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => {
+                        dispatch(resetOrder())
+                        dispatch(logOut())
+                    }
+                    }><Text style={styles.btnLogOut}><FontAwesomeIcon icon={faRightFromBracket} color={colors.darkGray} />   Cerrar sesión</Text></TouchableOpacity>
                 </View>
             </View>
         </SafeAreaView>

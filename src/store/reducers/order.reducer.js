@@ -1,4 +1,4 @@
-import { CONFIRMED_ORDER, GET_ORDERS } from "../actions/order.action";
+import { CONFIRMED_ORDER, GET_ORDERS, RESET_ORDER } from "../actions/order.action";
 
 const initialState = {
     orders: [],
@@ -10,6 +10,8 @@ const OrderReducer = (state = initialState, action) => {
             return { orders: [] }
         case GET_ORDERS:
             return { orders: action.orders }
+        case RESET_ORDER:
+            return { orders: [] }
         default:
             return state;
     }

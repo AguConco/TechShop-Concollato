@@ -1,8 +1,12 @@
 {
   "expo": {
-    "name": "AwesomeProject",
+    "name": "techshop",
     "slug": "techshop",
     "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -12,19 +16,28 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/f2cd51f2-813f-4b65-a133-149b21310c16"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
+      "bondleIdentifier": "com.coderhouse.places",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.coderhouse.places",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "permissions": [
+        "CAMERA",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -34,6 +47,9 @@
         "projectId": "f2cd51f2-813f-4b65-a133-149b21310c16"
       }
     },
-    "owner": "aguconcollato"
+    "owner": "aguconcollato",
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    }
   }
 }

@@ -67,7 +67,7 @@ const CheckoutScreen = ({ navigation }) => {
     }
 
     const validatePhone = (e) => {
-        setError('')
+        error === '*Completa todos los campos' && setError('')
         setPhone(e.toString())
 
         if (e.length >= 9) {
@@ -79,7 +79,7 @@ const CheckoutScreen = ({ navigation }) => {
     }
 
     const validateAddress = (e) => {
-        setError('')
+        error === '*Completa todos los campos' && setError('')
         setAddress(e)
 
         if (/^[a-zA-Z ]+$/.test(e)) {
@@ -167,7 +167,10 @@ const CheckoutScreen = ({ navigation }) => {
                             />
                             <TextInput
                                 placeholder="Altura"
-                                onChangeText={setHeight}
+                                onChangeText={e => {
+                                    error === '*Completa todos los campos' && setError('')
+                                    setHeight(e)
+                                }}
                                 value={height}
                                 style={{ ...styles.input, width: '32.5%' }}
                                 keyboardType={"number-pad"}

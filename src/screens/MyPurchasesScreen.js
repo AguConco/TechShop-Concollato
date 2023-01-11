@@ -9,17 +9,24 @@ import Loading from "../components/Loading"
 import { useIsFocused } from "@react-navigation/native"
 
 const MyPurchasesScreen = () => {
+    const isFocused = useIsFocused()
 
     const dispatch = useDispatch()
-    const orders = useSelector(state => state.order)
+    const stateOrder = useSelector(state => state.order.orders)
     const user = useSelector(state => state.user.user)
 
     const [loading, setLoading] = useState(true)
+    const [order, setOrder] = useState([])
 
     useEffect(() => {
-        dispatch(getOrder(user.uid))
-        orders.orders !== null ? orders.orders.length !== 0 && setLoading(false) : setLoading(false)
-    }, [useIsFocused()])
+        if (stateOrder !== null) {
+            (order.length !== stateOrder.length || loading || stateOrder.length === 0) && dispatch(getOrder(user.uid))
+            setOrder(stateOrder)
+            stateOrder.length !== 0 && setLoading(false)
+        } else {
+            setLoading(false)
+        }
+    }, [isFocused, stateOrder])
 
     const imgDetailOrder = (e) => {
         if (e.length < 4) {
@@ -34,7 +41,7 @@ const MyPurchasesScreen = () => {
         }
     }
 
-    const order = (e) => {
+    const renderOrder = (e) => {
         const date = new Date(e.datetime.seconds * 1000 + e.datetime.nanoseconds / 1000000)
         const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
         return (
@@ -56,15 +63,15 @@ const MyPurchasesScreen = () => {
                             <Loading />
                         </View>
                         :
-                        orders.orders !== null ?
-                        <FlatList
-                            data={orders.orders.sort((a, b) => a.datetime.seconds * 1000 + a.datetime.nanoseconds / 1000000 < b.datetime.seconds * 1000 + b.datetime.nanoseconds / 1000000)}
-                            renderItem={e => order(e.item)}
-                            keyExtractor={e => e.orderId}
-                            scrollEnabled={false}
-                        />
-                        :
-                        <Text style={{...styles.title, fontSize: fonts.h4}}>¡Todavía no has realizado ninguna compra!</Text>
+                        stateOrder !== null ?
+                            <FlatList
+                                data={stateOrder.sort((a, b) => a.datetime.seconds * 1000 + a.datetime.nanoseconds / 1000000 < b.datetime.seconds * 1000 + b.datetime.nanoseconds / 1000000)}
+                                renderItem={e => renderOrder(e.item)}
+                                keyExtractor={e => e.orderId}
+                                scrollEnabled={false}
+                            />
+                            :
+                            <Text style={{ ...styles.title, fontSize: fonts.h4 }}>¡Todavía no has realizado ninguna compra!</Text>
                 }
             </ScrollView>
         </SafeAreaView>

@@ -3,6 +3,7 @@ import { confirmedOrder } from "../../db"
 
 export const CONFIRMED_ORDER = 'CONFIRMED_ORDER'
 export const GET_ORDERS = 'GET_ORDERS'
+export const RESET_ORDER = 'RESET_ORDER'
 
 export const generateOrder = (infoOrder) => {
     return (dispatch) => {
@@ -58,3 +59,7 @@ export const getOrder = (uid) => {
         })
     }
 }
+
+export const resetOrder = () => ({
+    type: RESET_ORDER
+})
